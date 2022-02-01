@@ -1,0 +1,82 @@
+.messagebox {
+  height: 600px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.message-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.messagebox {
+  margin: 10px;
+  position: relative;
+}
+
+.message-actions {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  border-top: 1px solid #344767;
+}
+
+.message-actions textarea {
+  width: 95%;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.message-actions button {
+  width: 10%; /* border-radius: 50%; */
+  height: auto;
+  border: none;
+  font-size: 20px;
+  background: none;
+  color: #4c79df; /* border-left: 1px solid #344767; */
+}
+
+.message-actions button:disabled {
+  color: grey;
+}
+
+.message-row {
+  display: flex;
+}
+.message-row.admin {
+    justify-content: right;
+}
+
+.message {
+    width: 45%;
+    margin-top:10px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.message-body {
+    padding: 20px;
+    height: 80%;
+    overflow: scroll;
+}
+
+.message-row.user .message {
+    background: #4c79df;
+    color: #fff;
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+}
+
+.message-row.admin .message {
+    background: #7b809a;
+    color: #fff;
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+}

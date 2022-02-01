@@ -1,0 +1,77 @@
+ul.pagination {
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+    list-style: none;
+}
+li.page-item {
+    /* width: 50px; */
+    height: 50px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+a.page-link {
+    position: relative;
+    display: block;
+    color: #0d6efd;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-align: center;
+    padding: 0.375rem 0.75rem;
+    font-size: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 40px;
+}
+a.page-link:hover {
+    background: #7b809a;
+    color:#fff !important;
+}
+.page-item:not(:first-child) .page-link {
+    margin-left: -1px;
+}
+
+li.page-item.disabled {
+    cursor: unset !important;
+}
+
+.disabled a.page-link {
+    color: #7b809a;
+}
+.disabled a.page-link:hover {
+    color: #7b809a !important;
+    background: #fff;
+}
+i {
+    cursor: pointer;
+}
+.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+
+select.select-size {
+    margin-left: 10px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #808080b8;
+    outline: none;
+    color: #7b809a;
+}
+.apps-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
