@@ -65,7 +65,7 @@ function Users() {
       Header: "Webhook Status",
       accessor: "webhooked",
       Cell: ({ value }) => {
-        return value === "0" ? "Webhook Called" : "Webhook Call Pending";
+        return value === "1" ? "Webhook Called" : "Webhook Call Pending";
       },
     },
   ];
