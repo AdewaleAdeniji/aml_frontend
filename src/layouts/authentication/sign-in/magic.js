@@ -38,7 +38,7 @@ const MagicSignin = (props) => {
             const token = data.token.token;
             dispatch(saveToken(token));
             dispatch(saveUser(JSON.stringify(user)));
-            console.log(user,token);
+            //console.log(user,token);
             Swal.close();
             window.location.href = '/records';
         }
