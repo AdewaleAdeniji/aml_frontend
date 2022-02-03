@@ -16,6 +16,7 @@ import Icon from "@mui/material/Icon";
 import { Logout } from "layouts/authentication/logout";
 import Tickets from "layouts/tickets";
 import SupportTicket from "layouts/tickets/ticket";
+import MagicSignin from "layouts/authentication/sign-in/magic";
 
 const routes = [
   {
@@ -25,15 +26,22 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
-    shownav:true,
     admin:true,
   },
   {
     type: "collapse",
-    name: "Users",
-    key: "users",
+    name: "Sign in",
+    key: "magic_signin",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/magic/:magic_code",
+    component: <MagicSignin />,
+  },
+  {
+    type: "collapse",
+    name: "Records",
+    key: "records",
     icon: <Icon fontSize="small">people_outline</Icon>,
-    route: "/users",
+    route: "/records",
     component: <Users />,
     shownav:true,
     admin:true
@@ -45,7 +53,6 @@ const routes = [
     icon: <Icon fontSize="small">store</Icon>,
     route: "/businesses",
     component: <Businesses/>,
-    shownav:true,
     admin:true
   },
   {
@@ -55,7 +62,6 @@ const routes = [
     icon: <Icon fontSize="small">people_outline</Icon>,
     route: "/admin-users",
     component: <Admins />,
-    shownav:true,
     admin:true
   },
   {
@@ -89,7 +95,6 @@ const routes = [
     icon: <Icon fontSize="small">notifications</Icon>,
     route: "/notifications",
     component: <Notifications />,
-    shownav:true,
     admin:true
   },
   {
@@ -99,7 +104,6 @@ const routes = [
     icon: <Icon fontSize="small">chat</Icon>,
     route: "/tickets",
     component:<Tickets/>,
-    shownav:true,
     admin:true
   },
   {
@@ -117,7 +121,6 @@ const routes = [
     icon: <Icon fontSize="small">apps</Icon>,
     route: "/apps",
     component: <Apps/>,
-    admin:true
   },
   {
     type: "collapse",
@@ -126,6 +129,8 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
     component: <Profile />,
+    admin:true,
+    shownav:true
   },
   {
     type: "collapse",

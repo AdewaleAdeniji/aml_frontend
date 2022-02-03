@@ -35,13 +35,10 @@ export const userSlice = createSlice({
     saveStats: (state, action) => {
       state.stats = action.payload;
       localStorage.setItem('dashboard_stats',JSON.stringify(action.payload))
-      console.log(action.payload)
     },
     saveUser: (state, action) => {
       state.user = JSON.parse(action.payload);
       state.loggedin = true;
-      state.token = JSON.parse(action.payload).token;
-      localStorage.setItem("authT", JSON.parse(action.payload).token);
       localStorage.setItem("user_profile_meta", action.payload);
     },
     saveToken: (state, action) => {

@@ -1,5 +1,5 @@
 const config = {
-  base_url: "https://apis.ibunchng.com",
-  client_id: "storebounty",
+  base_url: "http://127.0.0.1:8000",
+  client_id: "aml",
 };
 export default config;

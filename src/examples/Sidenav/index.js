@@ -164,13 +164,13 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           </MDTypography>
         </MDBox>
         <MDBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <i className="fa fa-shopping-bag" style={{color:"#fff"}}></i>}
+          
           <MDBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
             <MDTypography component="h6" variant="button" fontWeight="medium" color={textColor}>
-              {(JSON.parse(localStorage.getItem('client_apps')||"{}"))?.current_app?.app_name}
+               AmlWatchman
             </MDTypography>
           </MDBox>
         </MDBox>
@@ -183,18 +183,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       />
       <List>{renderRoutes}</List>
       <MDBox p={2} mt="auto">
-        <Link to="/apps">
-        <MDButton
-        onClick={()=>history("/apps", { replace: true })}
-          target="_blank"
-          rel="noreferrer"
-          variant="gradient"
-          color={sidenavColor}
-          fullWidth
-        >
-          Switch Apps
-        </MDButton>
-        </Link>
+        
       </MDBox>
     </SidenavRoot>
   );

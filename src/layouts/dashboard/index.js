@@ -49,10 +49,8 @@ function Dashboard() {
     }
   }, [firstRun]);
   const fetchStats = async () => {
-    //toast.loading('')
     const stats = await getStats();
     setLoading(false);
-    //console.log(stats);
     if(stats.status===200){
       const dashstats = stats.data.data;
       setStats(dashstats);

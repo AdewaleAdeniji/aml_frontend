@@ -33,6 +33,7 @@ import moment from "moment";
 import "./pagination.css";
 import { getUsers } from "components/api";
 import MDTypography from "components/MDTypography";
+import { getProfile } from "components/api";
 
 function Users() {
   const columns = [
@@ -45,74 +46,35 @@ function Users() {
         return <div>{index.row.index + 1}</div>;
       },
     },
-    { Header: "First Name", accessor: "first_name", align: "left" },
-    { Header: "Last Name", accessor: "last_name"},
+    { Header: "Email", accessor: "email", align: "left" },
+    { Header: "User Hash", accessor: "user_hash" },
     {
-      Header: "Email Address",
+      Header: "Verification Status",
+      accessor: "status",
       align: "center",
-      accessor: "email",
-      Cell: ({ row }) => {
-        const { original } = row;
-        const res = original.email ? (
-          <>
-            <span>{original.email}</span>{" "}
-            {original.email_verified ? (
-              <i className="fa fa-check" title="Email has been verified"></i>
-            ) : (
-              ""
-            )}
-          </>
-        ) : (
-          "N/A"
-        );
-        return res;
-      },
-    },
-    {
-      Header: "Phone Number",
-      align: "center",
-      accessor: "phone",
-      Cell: ({ row }) => {
-        const { original } = row;
-        console.log(original.phone + '' + original.phone_verified);
-        const res = original.phone ? (
-          <>
-            <span>{original.phone}</span>{" "}
-            {original.phone_verified ? (
-              <i className="fa fa-check" title="Email has been verified"></i>
-            ) : (
-              ""
-            )}
-          </>
-        ) : (
-          "N/A"
-        );
-        return res;
-      },
-    },
-    {
-      Header: "Account Created Date",
-      accessor: "createdAt",
       Cell: ({ value }) => {
-        return <span>{moment(value).format("LLL")}</span>;
+        return value === "11"
+          ? "Failed"
+          : value === "10"
+          ? "Approved"
+          : "Pending";
       },
     },
+    { Header: "Message", accessor: "message" },
     {
-      Header: "Last Seen",
-      accessor: "lastSeen",
-      filterable: true,
+      Header: "Webhook Status",
+      accessor: "webhooked",
       Cell: ({ value }) => {
-        return <span>{moment(value).format("LLL")}</span>;
+        return value === "0" ? "Webhook Called" : "Webhook Call Pending";
       },
     },
-    { Header: "Status", accessor: "status", align: "center" },
   ];
 
-  const [users, setUsers] = useState([]);
+  const [users, setRecords] = useState([]);
   const rows = [...users];
   //console.log(rows, users);
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(20);
+  const [size, setSize] = useState(rows.length || 500);
   const [firstRun, setFirstRun] = useState(true);
   const [loading, setLoading] = useState(true);
   const [pageCount, setPageCount] = useState(0);
@@ -121,37 +83,34 @@ function Users() {
   useEffect(() => {
     if (firstRun) {
       setFirstRun(false);
-      fetchUsers(page, size);
+      fetchRecords(page, size);
     }
   }, [firstRun]);
   const handlePageClick = async (e) => {
     const newpage = e.selected;
     //console.log(newpage);
     setPage(newpage);
-    fetchUsers(newpage, size);
+    fetchRecords(newpage, size);
   };
-  const fetchUsers = async (page, size) => {
+  const fetchRecords = async (page, size) => {
     setLoading(true);
-    const userslist = await getUsers(page, size);
+    const records = await getProfile();
+    //console.log(records);
+
     setLoading(false);
-    if (userslist.status === 200) {
-      //console.log(userslist.data.data);
-      setUsers(userslist.data.data.users);
-      setPageCount(userslist.data.data.pages);
-      setTotal(userslist.data.data.total);
+    if (records.status === 200) {
+      setRecords(records?.data?.data?.content?.amls);
     } else {
-      toast.error("Unknown error Occured", {
-        position: "bottom-left",
-      });
+      toast.error("Error occured while fetching records");
     }
   };
   const changeSize = (pagesize) => {
-      if(pagesize==""){
-        return;
-      }
-          setSize(pagesize);
-    fetchUsers(page, pagesize);
-  }
+    if (pagesize == "") {
+      return;
+    }
+    setSize(pagesize);
+    fetchRecords(page, pagesize);
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -159,28 +118,32 @@ function Users() {
         <MDBox>
           <div style={{ display: "block" }}>
             <Card>
-              <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+              <MDBox
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                p={3}
+              >
                 <MDTypography variant="h6" gutterBottom>
-                  Users
+                  Records
                 </MDTypography>
               </MDBox>
-              {
-                  loading ? (
-                    <Holder/>
-                  ) : (
-              <DataTable
-                className="hidden"
-                table={{ columns, rows }}
-                showTotalEntries={false}
-                isSorted={false}
-                size={size}
-                noEndBorder
-                entriesPerPage={false}
-                style={{ display: "none" }}
-                pagination={false}
-              />
-                  )}
-              <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+              {loading ? (
+                <Holder />
+              ) : (
+                <DataTable
+                  className="hidden"
+                  table={{ columns, rows }}
+                  showTotalEntries={false}
+                  isSorted={false}
+                  size={size}
+                  noEndBorder
+                  entriesPerPage={false}
+                  style={{ display: "none" }}
+                  pagination={false}
+                />
+              )}
+              {/* <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
                 <MDTypography variant="h6" gutterBottom>
                   <ReactPaginate
                     breakLabel="..."
@@ -221,7 +184,7 @@ function Users() {
                     </select>
                   </div>
                 </MDBox>
-              </MDBox>
+              </MDBox> */}
             </Card>
           </div>
         </MDBox>

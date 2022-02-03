@@ -56,18 +56,9 @@ function Basic() {
     setLoading(false);
     toast.dismiss();
     if (log.status === 200) {
-      //.console.log(log.data);
-      localStorage.setItem('store_email',email);
-      const appsdata = log.data.data;
-      //console.log(appsdata)
-      localStorage.setItem('client_apps',JSON.stringify(appsdata));
-      localStorage.setItem('current_app_client_id',appsdata?.current_app?.client_id||'storebounty');
-      dispatch(saveToken(log.data.token));
-      window.location.href="/users";
+      
     } else {
-      setError(true);
-      // console.log(log?.data?.data?.message);
-      setErrorText(log?.data?.data?.message || "Unknown Error Occured");
+      
     }
   };
   return (

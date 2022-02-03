@@ -14,10 +14,10 @@ const PR = (response) => {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const login = async (email, password) => {
+export const login = async (magic_code) => {
   try {
-    const payload = { email, password };
-    const res = await axios.post(`${config.base_url}/accounts/api/v1/auth/admin/token`, payload);
+    const payload = { magic_code};
+    const res = await axios.post(`${config.base_url}/api/v1/login`, payload);
     return res;
   } catch (err) {
     if (err?.response) {
@@ -26,6 +26,33 @@ export const login = async (email, password) => {
     return err;
   }
 };
+export const saveWebhookUrl =  async (api_key,webhook) => {
+  try {
+    const payload = { webhook};
+    const res = await axios.post(`${config.base_url}/api/v1/webhook`, payload,{
+      headers : { 
+        Authorization:'Bearer '+api_key
+      }
+    });
+    return res;
+  } catch (err) {
+    if (err?.response) {
+      return err?.response;
+    }
+    return err;
+  }
+}
+export const getProfile =  async () => {
+  try {
+    const res = await getter(`${config.base_url}/api/v1/profile`,token);
+    return res;
+  } catch (err) {
+    if (err?.response) {
+      return err?.response;
+    }
+    return err;
+  }
+}
 export const getUsers = async (page, size) => {
   const res = await getter(
     `${config.base_url}/accounts/api/v1/report/users?page=${page}&size=${size}`,

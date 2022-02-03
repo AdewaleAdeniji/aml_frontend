@@ -34,9 +34,9 @@ function Footer({ light }) {
             fontSize={size.sm}
           >
             &copy; {new Date().getFullYear()}, &nbsp;&nbsp;
-            <Link href="https://storebounty.com/" target="_blank">
+            <Link href="https://amlwatchman.com/" target="_blank">
               <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
-                Storebounty
+                AMLWatchman
               </MDTypography>
             </Link>
           </MDBox>
